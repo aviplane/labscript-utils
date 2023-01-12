@@ -21,7 +21,7 @@ DEBUG = False
 # Tensorflow contains true double imports. This is arguably a bug in tensorflow,
 # (reported here: https://github.com/tensorflow/tensorflow/issues/35369), but let's work
 # around it since tensorflow is not our problem:
-WHITELIST = ['tensorflow', 'tensorflow_core']
+WHITELIST = ['tensorflow', 'tensorflow_core', 'distutils']
 
 
 class DoubleImportDenier(object):
