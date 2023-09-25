@@ -13,6 +13,7 @@
 import sys
 import os
 
+from zmq import ZMQError
 from labscript_utils.ls_zprocess import Lock, connect_to_zlock_server, kill_lock
 from labscript_utils import dedent
 from labscript_utils.shared_drive import path_to_agnostic
@@ -61,7 +62,10 @@ class File(_File):
     def close(self):
         _File.close(self)
         if hasattr(self, 'zlock'):
-            self.zlock.release()
+            try:
+                self.zlock.release()
+            except ZMQError:
+                print("does this try catch help - AP 2023/09/11")
         if hasattr(self, 'kill_lock'):
             self.kill_lock.release()
 
